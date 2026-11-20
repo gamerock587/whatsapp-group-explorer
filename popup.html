@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WhatsApp Group Explorer</title><link rel="stylesheet" href="popup.css"><link rel="stylesheet" href="workspace.css">
+</head>
+<body>
+<header><div class="brand-icon" aria-hidden="true">◎</div><div><h1>Group Explorer</h1><p>Your groups. Your contacts.</p></div><span class="local">LOCAL</span></header>
+<main>
+<div class="topline"><button id="back" class="text-button" hidden>← Groups</button><span id="connection">WhatsApp Web</span><button id="refresh" class="text-button">↻ Refresh</button></div>
+<h2 id="title">Your groups</h2><p id="subtitle">Choose a group to see names and phone numbers.</p>
+<section id="invitePanel" class="panel" hidden>
+<label for="inviteLink">Group invite link</label><div class="inline"><input id="inviteLink" type="url" placeholder="https://chat.whatsapp.com/…" autocomplete="off"><button id="copyInvite" class="secondary">Copy link</button></div>
+<p id="inviteNote" class="note"></p>
+</section>
+<section id="excelPanel" class="panel" hidden>
+<label for="excelFile">Compare with Excel</label><input id="excelFile" type="file" accept=".xlsx,.xls,.csv">
+<p id="fileNote" class="note">Select a workbook with names and phone numbers. Iraqi local numbers use +964 by default.</p>
+<div id="mapping" hidden>
+<div class="mapping-grid"><label>Sheet<select id="sheet"></select></label><label>Name column<select id="nameColumn"></select></label><label>Phone column<select id="phoneColumn"></select></label><label>Local country code<input id="country" value="964" inputmode="numeric" maxlength="3"></label></div>
+<label class="check"><input id="hasHeader" type="checkbox" checked> First row contains headers</label>
+<button id="compare" class="primary">Compare members</button><button id="clearExcel" class="text-button">Clear Excel</button>
+</div>
+<p id="importError" class="error-note" role="status"></p>
+</section>
+<div id="comparisonSummary" class="comparison-summary" hidden></div>
+<label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search groups…" aria-label="Search groups" autocomplete="off"></label>
+<div id="stats" class="stats" hidden><div><strong id="memberCount">0</strong><span>Members loaded</span></div><div><strong id="phoneCount">0</strong><span>Numbers available</span></div><div><strong id="missingCount">0</strong><span>Unavailable</span></div></div>
+<p id="warning" class="warning" role="status" hidden></p>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+<div id="list" aria-label="Groups"></div>
+<div id="actions" class="actions" hidden><button id="copy" class="primary">Copy numbers</button><button id="export" class="secondary">Export CSV</button></div>
+<button id="openWhatsApp" class="primary open" hidden>Open WhatsApp Web</button>
+<p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+</main>
+<footer>Excel is processed locally. Invitations are sent through your connected WhatsApp account only when you click Send invite.</footer>
+<dialog id="removeDialog"><h3>Remove this member?</h3><p id="removeDetails"></p><p>This removes the person from the selected WhatsApp group.</p><div class="inline"><button id="cancelRemove" class="secondary">Cancel</button><button id="confirmRemove" class="primary">Remove member</button></div></dialog>
+<script src="vendor/xlsx.full.min.js"></script><script src="roster.js"></script><script src="popup.js"></script>
+</body></html>
+
